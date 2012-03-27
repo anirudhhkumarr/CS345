@@ -8,22 +8,36 @@
 \begin{algorithm}
  \caption{Optimising projects}
  \begin{algorithmic}
-  \Function{Optimal}{$H, N$}
-    \For{$i \leftarrow$ 1 to $H$}
+  \Function{Optimal}{$N, H$}
+    \For{$i \leftarrow$ 0 to $H$}
      \State Optimal[$0$][$i$] $\gets$ 0
     \EndFor
-    \For{$i \leftarrow$ 1 to $N$}
+    \For{$i \leftarrow$ 0 to $N$}
      \State Optimal[$i$][$0$] $\gets$ 0
     \EndFor
-    \State id $\gets$ 1
-    \For{$n \leftarrow$ 1 to $H$}
-     \For{$h \leftarrow$ 1 to $N$}
-      \State Optimal[$n$][$h$] $\gets$ max$_{i=1}^{N-1}$($f_{id}[i]$ + Optimal[$n-1$][$h-i$])
-      \State Let $i$ be the one for which the maximum is achieved
-      \State Schedule Project P.No. for time i
+    \State $id \gets$ 1
+    \For{$n \leftarrow$ 1 to $N$}
+     \For{$h \leftarrow$ 1 to $H$}
+      \State Optimal[$n$][$h$] $\gets$ max$_{i=0}^{h}$($f_{id}[i]$ + Optimal[$n-1$][$h-i$])
+      \State Let the maximum be achieved for $i$
+      \State Schedule Project $id$ for time i
+      \State $id \gets id + 1$
      \EndFor
     \EndFor
   \EndFunction
  \end{algorithmic}
 \end{algorithm}
+\subsection{Explanation}
+The above dynamic programming algorithm maintains an $O(NH)$ array Optimal such that Optimal[$n$][$h$]
+represents the maximum total grade points for $n$ projects and $h$ hours to work on these projects. The
+ optimal scheduling for $n$ projects and $h$ hours can be represented by the following recurrence:
+\begin{center}
+ Optimal[$n$][$h$] = max$_{i=0}^{h}$($f_{id}[i]$ + Optimal[$n-1$][$h-i$])
+\end{center}
+This recurrence essentially states that if we schedule a project for $i$ hours and 
+then recursively calculate the optimal scheduling for the remaining projects in time $h-i$, and
+maximise the total grade points over all $i$, we will get the optimal scheduling strategy for $n$ projects.
+This is exactly what the above algorithm does. It initiates the first row and column with 0 
+(0 projects $\rightarrow$ 0 grade points, 0 hours $\rightarrow$ 0 grade points)
+\subsection{Time Complexity}
 \end{document}
