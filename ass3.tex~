@@ -17,7 +17,7 @@
     \EndFor
     \For{$n \leftarrow$ 1 to $H$}
      \For{$h \leftarrow$ 1 to $N$}
-      \State Optimal[$n$][$h$]
+      \State Optimal[i]
      \EndFor
     \EndFor
   \EndFunction

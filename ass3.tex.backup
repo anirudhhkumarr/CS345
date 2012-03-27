@@ -15,10 +15,9 @@
     \For{$i \leftarrow$ 1 to $N$}
      \State Optimal[$i$][$0$] $\gets$ 0
     \EndFor
-    \For{$n \leftarrow$ 1 to $H$}
-     \For{$h \leftarrow$ 1 to $N$}
-      \State Optimal[$n$][$h$]
-     \EndFor
+    \For{$i \leftarrow$ 1 to $H$}
+    \For{$j \leftarrow$ 1 to $N$}
+    \EndFor
     \EndFor
   \EndFunction
  \end{algorithmic}
