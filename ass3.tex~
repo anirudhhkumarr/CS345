@@ -15,9 +15,13 @@
     \For{$i \leftarrow$ 1 to $N$}
      \State Optimal[$i$][$0$] $\gets$ 0
     \EndFor
+    \State $id \gets$ 1
     \For{$n \leftarrow$ 1 to $H$}
      \For{$h \leftarrow$ 1 to $N$}
-      \State Optimal[i]
+      \State Optimal[$n$][$h$] $\gets$ max$_{i=1}^{N-1}$($f_{id}[i]$ + Optimal[$n-1$][$h-i$])
+      \State Let the maximum be achieved for $i$
+      \State Schedule Project $id$ for time i
+      \State $id \gets id + 1$
      \EndFor
     \EndFor
   \EndFunction

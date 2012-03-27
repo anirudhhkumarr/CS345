@@ -15,9 +15,13 @@
     \For{$i \leftarrow$ 1 to $N$}
      \State Optimal[$i$][$0$] $\gets$ 0
     \EndFor
-    \For{$i \leftarrow$ 1 to $H$}
-    \For{$j \leftarrow$ 1 to $N$}
-    \EndFor
+    \State id $\gets$ 1
+    \For{$n \leftarrow$ 1 to $H$}
+     \For{$h \leftarrow$ 1 to $N$}
+      \State Optimal[$n$][$h$] $\gets$ max$_{i=1}^{N-1}$($f_{id}[i]$ + Optimal[$n-1$][$h-i$])
+      \State Let $i$ be the one for which the maximum is achieved
+      \State Schedule Project P.No. for time i
+     \EndFor
     \EndFor
   \EndFunction
  \end{algorithmic}
