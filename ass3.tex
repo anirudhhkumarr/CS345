@@ -9,16 +9,16 @@
  \caption{Optimising projects}
  \begin{algorithmic}
   \Function{Optimal}{$N, H$}
-    \For{$i \leftarrow$ 1 to $H$}
+    \For{$i \leftarrow$ 0 to $H$}
      \State Optimal[$0$][$i$] $\gets$ 0
     \EndFor
-    \For{$i \leftarrow$ 1 to $N$}
+    \For{$i \leftarrow$ 0 to $N$}
      \State Optimal[$i$][$0$] $\gets$ 0
     \EndFor
     \State $id \gets$ 1
-    \For{$n \leftarrow$ 1 to $H$}
-     \For{$h \leftarrow$ 1 to $N$}
-      \State Optimal[$n$][$h$] $\gets$ max$_{i=0}^{N-1}$($f_{id}[i]$ + Optimal[$n-1$][$h-i$])
+    \For{$n \leftarrow$ 1 to $N$}
+     \For{$h \leftarrow$ 1 to $H$}
+      \State Optimal[$n$][$h$] $\gets$ max$_{i=0}^{h}$($f_{id}[i]$ + Optimal[$n-1$][$h-i$])
       \State Let the maximum be achieved for $i$
       \State Schedule Project $id$ for time i
       \State $id \gets id + 1$

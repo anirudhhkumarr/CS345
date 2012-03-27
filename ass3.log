@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.2.26)  28 MAR 2012 01:00
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.2.26)  28 MAR 2012 01:07
 entering extended mode
  %&-line parsing enabled.
 **ass3.tex
@@ -96,11 +96,10 @@ pe1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/public
 /amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
 m/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on ass3.pdf (1 page, 89249 bytes).
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on ass3.pdf (1 page, 81476 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
+ 38 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
