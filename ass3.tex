@@ -87,6 +87,9 @@ This recurrence essentially states that if we schedule a project for $i$ hours a
 then recursively calculate the optimal scheduling for the remaining projects in time $h-i$, and
 maximise the total grade points over all $i$, we will get the optimal scheduling strategy for $n$ projects.
 This is exactly what the above algorithm does. It initiates the first row and column with 0 
-(0 projects $\rightarrow$ 0 grade points, 0 hours $\rightarrow$ 0 grade points). For each $n$, $h$
+(0 projects $\rightarrow$ 0 grade points, 0 hours $\rightarrow$ 0 grade points). For each $n$, $h$ the values
+required are Optimal[$n-1$][$0$] to Optimal[$n-1$][$0$] so they are already computed.
 \subsection{Time Complexity}
+The algorithm requires O($NH$) space for storing the matrix. The time complexity is O($NH^2$), as for calculting
+the maximum we require O($H$) time and this is done for each entry in matrix.
 \end{document}
