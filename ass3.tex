@@ -4,7 +4,57 @@
 %opening
 
 \begin{document}
-\section{Solution of 2}
+\begin{center}{\Huge CS 345: Algorithms II}\\
+\begin{flushright}
+\textbf{Submitted By:}\\
+Anirudh Kumar (Y9088)\\
+Chandra Prakash (Y9181)
+\end{flushright}
+\LARGE \textbf{Assignment 3}\\
+\end{center}
+\normalsize
+\section{Solution-1}
+\begin{tabbing}
+====\====\====\====\====\kill
+assignEdgeWeight(S)\\
+\{\\
+\>$v\leftarrow S$\>\\
+\>$visited[v]\leftarrow true$\\
+\>$numPath[v]\leftarrow  0$\\
+\>for each vertex $x$ such that $(v,x)\in E$\\
+\>\>if($visited[x]==false)$\\
+\>\>\>$W[v,x] = numPath[v]$\\
+\>\>\>if($outDeg[x]==0$)\\
+\>\>\>\>$numPath[x] \leftarrow 1$\\
+\>\>\>else\\
+\>\>\>\>assignEdgeWeight($x$)\\
+\>\>\>$numPath[v] \leftarrow numPath[v]+numPath[x]$\\
+\>\>else\\
+\>\>\>$W[v,x] = numPath[v]$\\
+\>\>\>$numPath[v] \leftarrow numPath[v]+numPath[x]$\\
+\}\\
+\end{tabbing}
+\textbf{Proof of Algorithm}:\\
+Induction:\\
+\begin{description}
+\item{Base Case:} Only one edge is present i.e $(u,v)$\\
+$W[u,v] = 0$\\
+$numPath[v] = 1$\\
+$numPath[u] = 0 + numPath[v] =  1$\\
+\item{Induction Step}\\
+Let there be a graph G with $inDeg[u]=0$, $numPath[u]=m$, $outDeg[v]=0$ and all pathIDs are distinct and less than $m$.
+Another node $w$ is added to G such that $inDeg[w]=0$ and has $n$ outgoing edges to the vertices of graph G namely $\{u_1,u_2,..u_i...u_n\}$.\\
+Number of paths from $w$ to $v$ is given by \\\begin{center}$numPath[w] = \displaystyle\sum\limits_{i=1}^{n} numPath[u_i]$\end{center}
+Now, consider an edge $(w,u_i)$ and the path $u_i$ to $v$. Let $W[w,u_i] = x$ then pathID of this path is $x + $pathID$(u_i,v)$. Then, by our algorithm $W[w,u_i] = x=\displaystyle\sum\limits_{j=1}^{i-1} numPath[u_j]$. Therefore, $x<numPath[w]$ and pathID$(u_i,v)$ is already less  than $numPath[u_i]$(by induction).Therefore, pathID of each path less than the number of paths.\\
+Now, we need to show that the new pathIDs are distinct.Let there be two paths $(w,u_i,v)$ and $(w,u_j,v)$ with  same pathID then,\\
+\begin{center}
+$W[w,u_i]$ + pathID$(u_i,v)$ = $W[w,u_j]$ + pathID$(u_j,v)$\\
+\end{center}
+Without the loss of generality let $u_j$ be reached before $u_i$ in the loop. Then, \\$W[w,u_i]= W[w,u_j] + \displaystyle\sum\limits_{k=j}^{i-1} numPath[u_k]$.Therefore $W[w,u_i]\geq W[w,u_j]+numPath[u_j]$.\\We also have pathID$(u_j,v)<numPath[u_j]$(by induction).Therefore \\$W[w,u_i]$ + pathID$(u_i,v)$ > $W[w,u_j]$ + pathID$(u_j,v)$\\
+\end{description}
+Thus we have assigned unique pathIDs from $0\rightarrow N-1$ with each edge having integral edge weight.
+
+\section{Solution-2}
 \begin{algorithm}
  \caption{Optimising projects}
  \begin{algorithmic}
