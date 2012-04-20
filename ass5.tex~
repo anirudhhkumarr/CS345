@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage{algpseudocode}
 \usepackage{algorithm}
 \begin{document}
@@ -58,7 +58,7 @@ Finally we do a DFS on the remaining graph to find all the reachable vertices.
 The time complexity of ping($v$) ooperation has not been given so we represent it by P. The overall
 time complexity of the algorithm can be represented as:
 \begin{center}
- O(k(Plog(n) + n) + $|S|$)
+ O($k$(Plog($n$) + $m$) + $|S|$)
 \end{center}
 This includes the time required to find an $s$-$t$ path in the graph using BFS i.e. O(n).
 Second term is due to DFS done of the graph to report the set of reachable vertices. $|S|$ is the size
