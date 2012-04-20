@@ -1,0 +1,147 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\begin{document}
+
+\begin{center}{\Huge CS 345: Algorithms II}\\
+\begin{flushright}
+\textbf{Submitted By:}\\
+Anirudh Kumar (Y9088)\\
+Chandra Prakash (Y9181)
+\end{flushright}
+\LARGE \textbf{Assignment 3}\\
+\end{center}
+\section{Solution of 1}
+$\delta^0(i,j)=\infty $ if there is no edge between the two nodes\\
+$\delta^0(i,j)=weight(i,j) $if there is an edge between the two nodes\\
+$\delta^n(i,j)$ gives the distance between the nodes when all the nodes from $1$ to $n$ have been considered
+\subsection{}We propose the dynamic programming algorithm for the given problem:\\
+$\delta^k(i,j)=min\{\delta^{k-1}(i,j),\delta^{k-1}(i,k)+\delta^{k-1}(k,j)$\}\\\\
+\textbf{Pseudo Code:}
+\begin{algorithmic}
+\Function{shortestDistance}{M}
+\State M(i,j)=$\infty$ if there is no edge between i and j
+\State M(i,j)=weight(i,j) if there is an edge between i and j
+ \For {k $\leftarrow 1$ to $n$}
+  \For {i $\leftarrow 1$ to $n$}
+   \For {j $\leftarrow 1$ to $n$}
+    \State M(i,j) $\leftarrow$ min\{M(i,k)+M(k,j),M(i,j)\}
+   \EndFor
+  \EndFor
+ \EndFor
+ \For {i $\leftarrow 1$ to $n$}
+  \For {j $\leftarrow 1$ to $n$}
+   \State M(i,j) $\leftarrow$ min\{M(i,n)+M(n,j),M(i,j)\}
+  \EndFor
+ \EndFor
+\EndFunction
+\end{algorithmic}
+\textbf{Proof by induction:}
+\begin{description}
+\item{Base Case:}When n=2, the distance between all the pair is same as in their weight Matrix\\
+\item{Induction Step:}Let this be true for all values less than or equal to k.Then for the $(k+1)^{th}$ iteration, either $\delta^k(i,k)$ and $\delta^k(k,j)$ has already been evaluated or atleast one of them has not been evaluated.Consider the case when both are evaluated.Then,both these values are accessible in O(1) time from the matrix and the new value $\delta^k(i,j)$ is atmost the previous value in the table.So,the distance between the two is shorter than the previous value.Now consider the case when atleast one of these values has not been updated then we can compute the value of $\delta^k(i,k)$ has in this iteration and update the value of $\delta^k(i,j)$ in the next iteration.This is the reason why there is an update value at the end of iteration on k.Thus the time complexity is also $O(n^3)$\\
+\end{description}
+\subsection{}
+Let j be reachable from i through nodes $k_1,k_2,k_3,..k_t$.Now, we create a two dimensional array R such that R[i,j]=$k_1$,R[$k_1$,j]=$k_2$ and so on and finally R[$k_t$,j]=0.\\
+\textbf{Justification:}\\
+Suppose we want to report the shortest path from i to j.Then we follow the array entry staring from R[i,j] until we get a zero.So,this is done in optimal time that is the number of nodes in the path.The change in algorithm is as under\\
+
+\begin{algorithmic}
+\Function{shortestDistance}{M}
+ \State M(i,j)=$\infty$ if there is no edge between i and j
+ \State M(i,j)=weight(i,j) if there is an edge between i and j
+ \For {k $\leftarrow 1$ to $n$}
+  \For {i $\leftarrow 1$ to $n$}
+   \For {j $\leftarrow 1$ to $n$}
+    \If {M(i,k)+M(k,j) $<$ M(i,j)}
+     \If {(R[i,j]$\neq 0$ or j=k) and i$\neq$k}
+      \State R[i,j] = R[i,k]
+     \ElsIf {i=k}
+      \State R[i,j]=R[i,j]
+     \Else
+      \State R[i,j]=k
+     \EndIf
+    \EndIf
+    \State M(i,j) $\leftarrow$ min\{M(i,k)+M(k,j),M(i,j)\}
+   \EndFor
+  \EndFor
+ \EndFor
+ \For {i $\leftarrow 1$ to $n$}
+  \For {j $\leftarrow 1$ to $n$}
+   \If {M(i,n)+M(n,j) $<$ M(i,j)}
+    \If {(R[i,j]$\neq 0$ or j=n) and i$\neq$k}
+     \State R[i,j] = R[i,n]
+    \ElsIf {i=n}
+     \State R[i,j]=R[i,j]
+    \Else
+     \State R[i,j]=n
+    \EndIf
+   \EndIf
+   \State M(i,j) $\leftarrow$ min\{M(i,n)+M(n,j),M(i,j)\}
+  \EndFor
+ \EndFor
+\EndFunction
+\end{algorithmic}
+
+Thus the total space requirement is 2k$n^2$ ie $O(n^2)$
+This algorithm also reports the shortest path ie entry i,$k_1,k_2,k_3,...,k_t$,j by following the entries in the R array.
+\section{Solution of 2}
+\subsection{Algorithm}
+\subsubsection{Algorithm for question 2}
+ \begin{algorithmic}
+  \For{{\bf each} $(i, j)$}
+  \State $wt(i, j) \leftarrow -log(r_{ij})$
+  \EndFor
+  \For{{\bf each} $v \epsilon V$}
+  \If{negCycle($G$, $v$) != -1}{}
+  \State Report the sequence of vertices in negCycle($G$, $v$) as an opportunity
+  \EndIf
+  \EndFor
+ \end{algorithmic}
+\subsubsection{Function negCycle}
+\begin{algorithmic}
+\Function{negCycle}{$G$, $s$}
+\State $d[s]$ $\leftarrow$ 0;
+\For{{\bf each} $v$ $\epsilon$ $V/\{s\}$}{$d[v] \leftarrow \infty$;}
+\EndFor
+\For{{\bf each} $i = 1$ to $n-1$}
+\For{{\bf each} $(x, v)$ $\epsilon$ $E$}
+\If{$d[x] + wt(x, v) < d[v]$}
+\State $d[v] \leftarrow d[x] + wt(x, v);$ $pred[v] \leftarrow x;$
+\EndIf
+\EndFor
+\EndFor
+\State $flag \leftarrow False;$
+\For{{\bf each} $(x ,v) \epsilon E$}
+\If{$d[x] + wt(x, v) < d[v]$}
+\State $flag \leftarrow True;$ $cycleVertex \leftarrow v;$
+\EndIf
+\EndFor
+\If{$flag$}
+\State $v \leftarrow pred[cycleVertex];$
+\While{$v != cycleVertex$}
+\State append $v$ to $cycle;$ $v \leftarrow pred[v];$
+\EndWhile
+\State append $v$ to $cycle$;
+\State \Return $cycle$;
+\Else
+\State \Return -1;
+\EndIf
+\EndFunction
+\end{algorithmic}
+\subsection{Proof of correctness}
+Algorithm 2 is a slightly modified `SSSP with negative edges' algorithm discussed in class, so that it
+returns the negative cycle itself.\\
+We find a negative cycle in the new graph, which is created after taking the negative log of the
+edge weights of original graph.
+\begin{center}
+ $\displaystyle\sum\limits_{v \epsilon Cycle}{wt(i, j)} < 0$\\
+ $\displaystyle\sum\limits_{v \epsilon Cycle}{-log(r_{ij})} < 0$\\
+ $-log(\displaystyle\prod\limits_{v \epsilon Cycle}{r_{ij}}) < 0$\\
+ $\displaystyle\prod\limits_{v \epsilon Cycle}{r_{ij} > 1}$
+\end{center}
+Therefore a negative cycle in a modified graph correponds to an opportunity cycle in original graph.
+\subsection{Time Complexity}
+The time complexity of negCycle is O($mn$), due to the second `for' loop. Since it is run $n$ times the overall time
+complexity is O($mn^2$).
+\end{document}

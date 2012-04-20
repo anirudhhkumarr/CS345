@@ -1,0 +1,31 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\begin{document}
+
+\begin{center}{\Huge CS 345: Algorithms II}\\
+\begin{flushright}
+\textbf{Submitted By:}\\
+Anirudh Kumar (Y9088)\\
+Chandra Prakash (Y9181)
+\end{flushright}
+\LARGE \textbf{Assignment 5}\\
+\end{center}
+\section{Solution of 2}
+\subsection{Pseudo Code:}
+\begin{algorithmic}
+\Function{Algorithm}{G, s, t, k}
+\While {there is an s-t path in the graph G}
+ \State Find a simple s-t path in the graph G (no vertex repeated)
+ \State Ping vertices on the path in order of a binary search to find the 
+ \State nearest node on this path which is unreachable from s. Let this node
+ \State be $v$ and the node immediately preceding it be $u$.
+ \State Remove ($u$, $v$) from the graph G.
+\EndWhile
+\State do a DFS of the remaining graph G from $s$ to find all the vertices
+\State reachable from s.
+\EndFunction
+\end{algorithmic}
+\subsection{Proof:}
+The length of s-t path
+\end{document}
